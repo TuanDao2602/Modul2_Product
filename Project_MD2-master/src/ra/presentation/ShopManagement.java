@@ -20,7 +20,7 @@ public class ShopManagement {
         Scanner scanner = new Scanner(System.in);
         List<User> listUser = new ArrayList<>();
         Date date = new Date();
-        User user = new User(1, "ad", "1", "Đào Văn Tuấn", "Daovantuan9999@yahoo.com", "0973523050",1, true ,date);
+        User user = new User(1, "ad", "1", "Đào Văn Tuấn", "Daovantuan9999@yahoo.com", "0973523050",true, true ,date);
         listUser.add(user);
         UserImpl.writeFromFile(listUser);
         do {
@@ -45,7 +45,7 @@ public class ShopManagement {
                     do {
                         User user1 = login(scanner);
                         if (user1!=null){
-                            if (user1.getPermission()==1){
+                            if (user1.isPermission()==true){
                                 adminMenu(scanner);
                                 break;
                             }else {

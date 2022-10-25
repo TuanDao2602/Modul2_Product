@@ -1,12 +1,16 @@
 package ra.presentation;
 
 import ra.bussiness.config.ShopMessage;
+import ra.bussiness.entity.Product;
+import ra.bussiness.entity.User;
 import ra.bussiness.impl.UserImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserMenu {
     public  static  void userManagementMenu (Scanner scanner){
+        UserImpl userImp = new UserImpl();
         boolean exit = true;
         do {
 
@@ -39,6 +43,15 @@ public class UserMenu {
                     UserImpl.addAdminUser(scanner);
                     break;
                 case 3:
+                    System.out.println("mời bạn nhập id muốn cập nhật ");
+                    int idUpdate =Integer.parseInt (scanner.nextLine());
+                    List<User> listUser = userImp.readFromFile();
+                    for (User user: listUser) {
+                        if (user.getUserId()==idUpdate){
+                            userImp.update(userImp.inputDataNew(user,scanner));
+                        }
+                        break;
+                    }
                     break;
                 case 4:
                     UserImpl.updateUserStatus(scanner);

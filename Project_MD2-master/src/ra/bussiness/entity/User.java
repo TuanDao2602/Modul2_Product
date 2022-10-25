@@ -10,14 +10,14 @@ public class User implements Serializable {
     private String fullName;
     private String email;
     private String phoneNumber;
-    private int permission = 4;
+    private boolean permission = false;
     private boolean userStatus;
     private Date date;
 
     public User() {
     }
 
-    public User(int userId, String userName, String password, String fullName, String email, String phoneNumber, int permission, boolean userStatus, Date date) {
+    public User(int userId, String userName, String password, String fullName, String email, String phoneNumber, boolean permission, boolean userStatus, Date date) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -77,11 +77,11 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getPermission() {
+    public boolean isPermission() {
         return permission;
     }
 
-    public void setPermission(int permission) {
+    public void setPermission(boolean permission) {
         this.permission = permission;
     }
 

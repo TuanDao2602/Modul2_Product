@@ -264,12 +264,8 @@ public class UserImpl implements IShop <User , String>, IUser {
             status = "không còn hoạt động";
         }
         String permision = "" ;
-        if (member.getPermission()==1){
+        if (member.isPermission()==true){
             permision = "Admin";
-        }else if (member.getPermission()==2){
-            permision = "Dimond";
-        }else if (member.getPermission()==3){
-            permision = "Gold";
         }else {
             permision = "Member";
         }
@@ -283,16 +279,11 @@ public class UserImpl implements IShop <User , String>, IUser {
       List<User> userList = readFromFile();
         for (User user :userList) {
             if (user.getUserName().equals(str)){
-                if (user.isUserStatus()){
                     user.setUserStatus(false);
-                    return  true;
-                }else {
-                    user.setUserStatus(true);
-                    return  true;
-                }
+
             }
-        }
-        return false;
+        }return writeFromFile(userList);
+
     }
     @Override
     public void searchByName(String str) {
@@ -400,7 +391,7 @@ public class UserImpl implements IShop <User , String>, IUser {
         }while (true);
         Date date = new Date();
         user.setDate(date);
-        user.setPermission(1);
+        user.setPermission(true);
         boolean check = userImpl.create(user);
         if (check){
             System.out.println("Thêm tài khoản admin mới thành công !");
@@ -428,4 +419,23 @@ public class UserImpl implements IShop <User , String>, IUser {
         String name = scanner.nextLine();
         userImpl.searchByName(name);
     }
-}
+//        public boolean userUpdateMember(User user) {
+//            List<User> listUser = readFromFile();
+//            boolean returnData = false;
+//            for (int i = 0; i < listUser.size(); i++) {
+//                if (listUser.get(i).getUserId()==(user.getUserId()) ) {
+//                    //Thuc hien cap nhat
+//                    listUser.set(i, user);
+//                    returnData = true;
+//                    break;
+//                }
+//            }
+//            boolean result = writeFromFile(listUser);
+//            if (result && returnData) {
+//                return true;
+//            }
+//            return false;
+//        }
+
+    }
+
