@@ -1,11 +1,11 @@
 package ra.bussiness.impl;
 
-import ra.bussiness.config.ShopConstant;
 import ra.bussiness.config.ShopMessage;
 import ra.bussiness.config.shopValidate;
 import ra.bussiness.design.ICatalog;
 import ra.bussiness.design.IShop;
 import ra.bussiness.entity.Catalog;
+import ra.bussiness.file.DataUrl;
 import ra.bussiness.file.FileAll;
 
 import java.util.ArrayList;
@@ -15,14 +15,15 @@ import java.util.Scanner;
 public class CatalogImpl implements IShop<Catalog,String> , ICatalog {
     public static List<Catalog> readFromFile (){
         FileAll <Catalog> fileAll = new FileAll<>();
-        List<Catalog> list = fileAll.readFromFile(ShopConstant.CATALOG_URL);
+        List<Catalog> list = fileAll.readFromFile(DataUrl.CATALOG_URL);
         return list;
     }
     public static boolean writeFromFile (List<Catalog> list){
         FileAll<Catalog> fileAll = new FileAll<>();
-        boolean returnData = fileAll.writeFromFile(list,ShopConstant.CATALOG_URL);
+        boolean returnData = fileAll.writeFromFile(list,DataUrl.CATALOG_URL);
         return returnData;
     }
+
     @Override
     public boolean create(Catalog catalog) {
         List<Catalog> catalogList = readFromFile();
@@ -237,8 +238,11 @@ public class CatalogImpl implements IShop<Catalog,String> , ICatalog {
         }else {
             status = "Không hoạt động";
         }
-        System.out.printf("Mã danh mục: %-10s  Tên Danh Mục: %-30s  Trạng thái: %-20s\n",catalog.getCatalogId(),catalog.getCatalogName(),status);
-        System.out.printf("Mô tả: %s\n",catalog.getContent());
+        System.out.println("*-------------------------------------------------------------------------------------------------------*");
+        System.out.printf(" Mã danh mục: %-15s  Tên Danh Mục: %-30s  Trạng thái: %-15s\n",catalog.getCatalogId(),catalog.getCatalogName(),status);
+        System.out.printf(" Mô tả: %s\n",catalog.getContent());
+        System.out.println("*-------------------------------------------------------------------------------------------------------*");
+
     }
 
     @Override

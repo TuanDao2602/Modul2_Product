@@ -1,7 +1,5 @@
 package ra.bussiness.file;
 
-import ra.bussiness.config.ShopConstant;
-
 import java.io.*;
 import java.util.List;
 

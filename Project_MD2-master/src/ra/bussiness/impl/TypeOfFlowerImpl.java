@@ -1,12 +1,11 @@
 package ra.bussiness.impl;
 
-import ra.bussiness.config.ShopConstant;
 import ra.bussiness.config.ShopMessage;
 import ra.bussiness.config.shopValidate;
 import ra.bussiness.design.IShop;
 import ra.bussiness.design.ITypeOfFlower;
-import ra.bussiness.entity.Flower;
 import ra.bussiness.entity.TypeOfFlower;
+import ra.bussiness.file.DataUrl;
 import ra.bussiness.file.FileAll;
 
 import java.util.ArrayList;
@@ -16,13 +15,13 @@ import java.util.Scanner;
 public class TypeOfFlowerImpl implements IShop<TypeOfFlower,Integer>, ITypeOfFlower {
     public static List<TypeOfFlower> readFromFile (){
         FileAll<TypeOfFlower> fileAll = new FileAll<>();
-        List<TypeOfFlower> list = fileAll.readFromFile(ShopConstant.TYPEOFFLOER_URL);
+        List<TypeOfFlower> list = fileAll.readFromFile(DataUrl.TYPEOFFLOER_URL);
         return list;
 
     }
     public static boolean writeFromFile (List<TypeOfFlower> list){
         FileAll<TypeOfFlower> fileAll = new FileAll<>();
-        boolean returnData = fileAll.writeFromFile(list,ShopConstant.TYPEOFFLOER_URL);
+        boolean returnData = fileAll.writeFromFile(list,DataUrl.TYPEOFFLOER_URL);
         return returnData;
     }
     @Override
@@ -168,8 +167,10 @@ public class TypeOfFlowerImpl implements IShop<TypeOfFlower,Integer>, ITypeOfFlo
         }else {
             status = "Không còn bán";
         }
-            System.out.printf("Mã loại hoa: %-5d Tên loại hoa: %-30s Trạng thái: %s\n",typeFlower.getTypeFlowerId(),typeFlower.getTypeFlowerName(),status);
-            System.out.printf("Mô tả: %s\n",typeFlower.getContent());
+        System.out.println("*-------------------------------------------------------------------------------------------------------*");
+            System.out.printf(" Mã loại hoa: %-15d Tên loại hoa: %-30s Trạng thái: %s\n",typeFlower.getTypeFlowerId(),typeFlower.getTypeFlowerName(),status);
+            System.out.printf(" Mô tả: %s\n",typeFlower.getContent());
+        System.out.println("*-------------------------------------------------------------------------------------------------------*");
     }
 
     @Override

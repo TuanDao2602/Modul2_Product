@@ -1,12 +1,11 @@
 package ra.bussiness.impl;
 
-import ra.bussiness.config.ShopConstant;
 import ra.bussiness.config.ShopMessage;
 import ra.bussiness.config.shopValidate;
 import ra.bussiness.design.IShop;
 import ra.bussiness.design.IUser;
-import ra.bussiness.entity.Catalog;
 import ra.bussiness.entity.User;
+import ra.bussiness.file.DataUrl;
 import ra.bussiness.file.FileAll;
 
 import java.util.*;
@@ -14,12 +13,12 @@ import java.util.*;
 public class UserImpl implements IShop <User , String>, IUser {
     public static List<User> readFromFile (){
         FileAll<User> fileAll = new FileAll<>();
-        List<User> listUser =  fileAll.readFromFile(ShopConstant.USER_URL);
+        List<User> listUser =  fileAll.readFromFile(DataUrl.USER_URL);
         return listUser;
     }
     public static boolean writeFromFile (List<User> list){
         FileAll<User> fileAll = new FileAll<>();
-        boolean returnData = fileAll.writeFromFile(list,ShopConstant.USER_URL);
+        boolean returnData = fileAll.writeFromFile(list,DataUrl.USER_URL);
         return returnData;
     }
 
@@ -269,9 +268,11 @@ public class UserImpl implements IShop <User , String>, IUser {
         }else {
             permision = "Member";
         }
+        System.out.println("*-----------------------------------------------------------------------------------------------------------------------------------------*");
+        System.out.printf(" Mã tài khoản:%-20d  Tên tài khoản: %-20s Họ và tên: %-20s Số điện thoại: %-20s \n",member.getUserId(),member.getUserName(),member.getFullName(),member.getPhoneNumber());
+        System.out.printf(" Email: %-25s Loại tài khoản: %-20s Trạng thái: %-20s Ngày đăng ký: %-20s\n",member.getEmail(),permision,status,member.getDate() );
+        System.out.println("*-----------------------------------------------------------------------------------------------------------------------------------------*");
 
-        System.out.printf("Mã tài khoản:%-10d  Tên tài khoản: %-20s Họ và tên: %-30s Số điện thoại: %-15s \n",member.getUserId(),member.getUserName(),member.getFullName(),member.getPhoneNumber());
-        System.out.printf("Email: %-20s Loại tài khoản: %-25s Trạng thái: %-10s Ngày đăng ký: %-20s\n",member.getEmail(),permision,status,member.getDate() );
     }
 
     @Override
@@ -419,23 +420,5 @@ public class UserImpl implements IShop <User , String>, IUser {
         String name = scanner.nextLine();
         userImpl.searchByName(name);
     }
-//        public boolean userUpdateMember(User user) {
-//            List<User> listUser = readFromFile();
-//            boolean returnData = false;
-//            for (int i = 0; i < listUser.size(); i++) {
-//                if (listUser.get(i).getUserId()==(user.getUserId()) ) {
-//                    //Thuc hien cap nhat
-//                    listUser.set(i, user);
-//                    returnData = true;
-//                    break;
-//                }
-//            }
-//            boolean result = writeFromFile(listUser);
-//            if (result && returnData) {
-//                return true;
-//            }
-//            return false;
-//        }
-
     }
 

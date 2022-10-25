@@ -1,5 +1,6 @@
 package ra.bussiness.design;
 
 public interface IFlower {
-    boolean searchByNameOrPrice(String str,Float price);
+    boolean searchByName(String str);
+    boolean searchByPrice(float price);
 }

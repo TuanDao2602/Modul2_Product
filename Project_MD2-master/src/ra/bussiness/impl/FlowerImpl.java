@@ -1,12 +1,12 @@
 package ra.bussiness.impl;
 
-import ra.bussiness.config.ShopConstant;
 import ra.bussiness.config.ShopMessage;
 import ra.bussiness.config.shopValidate;
 import ra.bussiness.design.IFlower;
 import ra.bussiness.design.IShop;
 import ra.bussiness.entity.Flower;
 import ra.bussiness.entity.TypeOfFlower;
+import ra.bussiness.file.DataUrl;
 import ra.bussiness.file.FileAll;
 
 import java.util.ArrayList;
@@ -16,12 +16,12 @@ import java.util.Scanner;
 public class FlowerImpl implements IShop<Flower,String> , IFlower {
     public static List<Flower> readFromFile (){
         FileAll<Flower> fileAll = new FileAll<>();
-        List<Flower> flowerList =  fileAll.readFromFile(ShopConstant.FLOWER_URL);
+        List<Flower> flowerList =  fileAll.readFromFile(DataUrl.FLOWER_URL);
         return flowerList;
     }
     public static boolean writeFromFile (List<Flower> list){
         FileAll<Flower> fileAll = new FileAll<>();
-        boolean returnData = fileAll.writeFromFile(list,ShopConstant.FLOWER_URL);
+        boolean returnData = fileAll.writeFromFile(list,DataUrl.FLOWER_URL);
         return returnData;
     }
     @Override
@@ -205,8 +205,16 @@ public class FlowerImpl implements IShop<Flower,String> , IFlower {
         }else {
             status = "hết hoa";
         }
-        System.out.printf("Mã loại hoa: %-5s Tên loại hoa: %-30s Trạng thái: %s\n",flower.getFlowerId(),flower.getFlowerName(),status);
-        System.out.printf("Mô tả: %s\n",flower.getContent());
+        System.out.println("*---------------------------------------------------------------------------------------------------------------------------------*");
+        System.out.printf( " Mã loại hoa: %-15s  Tên loại hoa: %-15s  Gía Bán :%-15f  Trạng thái: %-15s        \n",flower.getFlowerId(),flower.getFlowerName(),flower.getExportPrice(),status);
+        System.out.printf( " Mô tả: %s                                                                    \n",flower.getContent());
+        System.out.println("*---------------------------------------------------------------------------------------------------------------------------------*");
+//        System.out.printf("%-15s%-30s%-15f%-15s\n","Mã loại hoa","Tên loại hoa","Gía Bán","Trạng thái");
+//        System.out.printf("%-15s%-30s%-15f%-15s\n",flower.getFlowerId(),flower.getFlowerName(),flower.getExportPrice(),status);
+//        System.out.printf("%s","Mô tả:");
+//        System.out.printf("%s",flower.getContent());
+
+
 
     }
 
@@ -223,17 +231,7 @@ public class FlowerImpl implements IShop<Flower,String> , IFlower {
         return false;
     }
 
-    @Override
-    public boolean searchByNameOrPrice(String str, Float price) {
-        List<Flower> list = readFromFile();
-        for (Flower flower :list) {
-            if (flower.getFlowerName().toLowerCase().contains(str) || flower.getExportPrice()<price){
-                displayData(flower);
-                return true;
-            }
-        }
-        return false;
-    }
+
     public static void inputFlower (Scanner scanner){
         FlowerImpl flowerImpl = new FlowerImpl();
         System.out.println("Nhập vào số lượng loài hoa bạn muốn nhập lần này: ");
@@ -288,8 +286,6 @@ public class FlowerImpl implements IShop<Flower,String> , IFlower {
     }
     public Flower newInputData(Flower flowerNew,Scanner sc) {
         List<Flower> listFlower = readFromFile();
-
-
         do {
             System.out.println("Nhập vào tên loài hoa: ");
             String name = sc.nextLine();
@@ -392,4 +388,29 @@ public class FlowerImpl implements IShop<Flower,String> , IFlower {
         }while (true);
         return flowerNew;
     }
-}
+
+    @Override
+    public boolean searchByName(String str) {
+            List<Flower> list = readFromFile();
+            for (Flower flower :list) {
+                if (flower.getFlowerId().contains(str)){
+                    displayData(flower);
+                    return true;
+                }
+            }
+            return false;
+    }
+
+    @Override
+    public boolean searchByPrice(float price) {
+            List<Flower> list = readFromFile();
+            for (Flower flower :list) {
+                if (flower.getExportPrice()==price){
+                    displayData(flower);
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+

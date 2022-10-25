@@ -55,7 +55,30 @@ public class FlowerMenu {
                     FlowerImpl.deleteFlower(scanner);
                     break;
                 case 5:
-                    break;
+                    do {
+                        System.out.println("nhập vào id hoặc giá sản phẩm để tìm kiếm");
+                        System.out.println("1. Nhập vào id của loài hoa để tìm kiếm");
+                        System.out.println("2. Nhập vào giá của loài hoa để tìm kiếm");
+                        System.out.println("sự lựa chọn của bạn là :");
+                        int choice1 = Integer.parseInt(scanner.nextLine());
+                        switch (choice1){
+                            case 1:
+                                System.out.println("Nhập vào tên của Loài hoa cần tìm kiếm");
+                                String searchName = scanner.nextLine();
+                                flowerImp.searchByName(searchName);
+                                break;
+                            case 2:
+                                System.out.println("Nhập vào giá tiền của loài hoa cần tìm kiếm");
+                                float searchPrice = Float.parseFloat(scanner.nextLine());
+                                flowerImp.searchByPrice(searchPrice);
+                                break;
+                            default:
+                                System.out.println("nhập 1-2");
+                                break;
+                        }
+                    }while (true);
+
+
                 case 6:
                     exit = false;
                     break;

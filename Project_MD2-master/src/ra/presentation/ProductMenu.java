@@ -24,8 +24,8 @@ public class ProductMenu {
             System.out.println("|-------------------------------------|");
             System.out.println("| 5. Thoát.                           |");
             System.out.println("|-------------------------------------|");
-            System.out.print(  "| Lựa chọn của bạn:                   |");
-            System.out.println("|-------------------------------------|");
+            System.out.print(" Lựa chọn của bạn:");
+
             int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());

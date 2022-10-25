@@ -1,11 +1,11 @@
 package ra.bussiness.impl;
 
-import ra.bussiness.config.ShopConstant;
 import ra.bussiness.config.ShopMessage;
 import ra.bussiness.config.shopValidate;
 import ra.bussiness.design.IProduct;
 import ra.bussiness.design.IShop;
 import ra.bussiness.entity.*;
+import ra.bussiness.file.DataUrl;
 import ra.bussiness.file.FileAll;
 
 import java.util.ArrayList;
@@ -15,13 +15,13 @@ import java.util.Scanner;
 public class ProductImpl implements IShop<Product, String> , IProduct {
     public static List<Product> readFromFile() {
         FileAll<Product> fileAll = new FileAll<>();
-        List<Product> listProduct = fileAll.readFromFile(ShopConstant.PRODUCT_URL);
+        List<Product> listProduct = fileAll.readFromFile(DataUrl.PRODUCT_URL);
         return listProduct;
     }
 
     public static boolean writeFromFile(List<Product> list) {
         FileAll<Product> fileAll = new FileAll<>();
-        boolean returnData = fileAll.writeFromFile(list, ShopConstant.PRODUCT_URL);
+        boolean returnData = fileAll.writeFromFile(list, DataUrl.PRODUCT_URL);
         return returnData;
     }
 
@@ -350,15 +350,18 @@ public class ProductImpl implements IShop<Product, String> , IProduct {
         }else {
             status = "Không còn bán. ";
         }
-        System.out.printf("Tên sản phẩm %50s\n",product.getProductName());
-        System.out.printf("Mã sản phẩm: %-10s Giá tiền bán: %-20f  Trạng thái: %-15s\n",product.getProductId(),product.getExportPrice(),status);
-        System.out.print("Hoa được sử dụng: ");
+        System.out.println("*-----------------------------------------------------------------------------------*");
+        System.out.printf(" Tên sản phẩm %25s\n",product.getProductName());
+        System.out.printf(" Mã sản phẩm: %-15s Giá tiền bán: %-20f  Trạng thái: %-15s\n",product.getProductId(),product.getExportPrice(),status);
+        System.out.print(" Hoa được sử dụng: ");
+
         for (int i = 0; i < product.getListFlower().size(); i++) {
             System.out.print(product.getListFlower().get(i).getFlower().getFlowerName() + " (Số lượng: " +product.getListFlower().get(i).getQuantity() +")  ");
         }
         System.out.print("\n");
-        System.out.printf("Mô tả: " +product.getContent());
+        System.out.printf(" Mô tả %25s: ",product.getContent());
         System.out.print("\n");
+        System.out.println("*-----------------------------------------------------------------------------------*");
     }
 
     @Override
