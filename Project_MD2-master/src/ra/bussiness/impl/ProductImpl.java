@@ -349,6 +349,7 @@ public class ProductImpl implements IShop<Product, String> , IProduct {
             status = "Còn bán";
         }else {
             status = "Không còn bán. ";
+
         }
         System.out.println("*-----------------------------------------------------------------------------------*");
         System.out.printf(" Tên sản phẩm %25s\n",product.getProductName());

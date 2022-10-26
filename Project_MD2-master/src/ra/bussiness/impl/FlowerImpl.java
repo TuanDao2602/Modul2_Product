@@ -224,11 +224,10 @@ public class FlowerImpl implements IShop<Flower,String> , IFlower {
         for (Flower flower :list) {
             if (flower.getFlowerId().equals(str)){
                 flower.setFlowerStatus(false);
-                create(flower);
-                return true;
+
             }
         }
-        return false;
+        return writeFromFile(list);
     }
 
 

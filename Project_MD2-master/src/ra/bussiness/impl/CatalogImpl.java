@@ -240,7 +240,7 @@ public class CatalogImpl implements IShop<Catalog,String> , ICatalog {
         }
         System.out.println("*-------------------------------------------------------------------------------------------------------*");
         System.out.printf(" Mã danh mục: %-15s  Tên Danh Mục: %-30s  Trạng thái: %-15s\n",catalog.getCatalogId(),catalog.getCatalogName(),status);
-        System.out.printf(" Mô tả: %s\n",catalog.getContent());
+        System.out.printf(" bMô tả: %s\n",catalog.getContent());
         System.out.println("*-------------------------------------------------------------------------------------------------------*");
 
     }
@@ -251,11 +251,11 @@ public class CatalogImpl implements IShop<Catalog,String> , ICatalog {
         for (Catalog cat :list) {
             if (cat.getCatalogId().equals(id)){
                 cat.setCatalogStatus(false);
-                create(cat);
-                return true;
+
+
             }
         }
-        return false;
+        return writeFromFile(list);
     }
 
     @Override

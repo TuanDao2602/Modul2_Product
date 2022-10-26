@@ -49,8 +49,9 @@ public class UserMenu {
                     for (User user: listUser) {
                         if (user.getUserId()==idUpdate){
                             userImp.update(userImp.inputDataNew(user,scanner));
+                            break;
                         }
-                        break;
+
                     }
                     break;
                 case 4:

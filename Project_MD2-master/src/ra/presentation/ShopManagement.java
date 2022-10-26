@@ -17,20 +17,21 @@ public class ShopManagement {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<User> listUser = new ArrayList<>();
-        Date date = new Date();
-        User user = new User(1, "ad", "1", "Đào Văn Tuấn", "Daovantuan9999@yahoo.com", "0973523050",true, true ,date);
-        listUser.add(user);
-        UserImpl.writeFromFile(listUser);
+//        Date date = new Date();
+//        User user = new User(1, "ad", "1", "Đào Văn Tuấn", "Daovantuan9999@yahoo.com", "0973523050",true, true ,date);
+//        listUser.add(user);
+//        UserImpl.writeFromFile(listUser);
         do {
-            System.out.println("|----------Quản Trị Tài Khoản----------|");
-            System.out.println("|--------------------------------------|");
-            System.out.println("| 1. Đăng nhập                         |");
-            System.out.println("|--------------------------------------|");
-            System.out.println("| 2. Đăng ký                           |");
-            System.out.println("|--------------------------------------|");
-            System.out.println("| 3. Thoát                             |");
-            System.out.println("|--------------------------------------|");
-            System.out.print("Lựa chọn của bạn: ");
+            System.out.println("                                                                     *----------Quản Trị Tài Khoản----------*");
+            System.out.println("                                                                     |--------------------------------------|");
+            System.out.println("                                                                     |            1. Đăng nhập              |");
+            System.out.println("                                                                     |--------------------------------------|");
+            System.out.println("                                                                     |            2. Đăng ký                |");
+            System.out.println("                                                                     |--------------------------------------|");
+            System.out.println("                                                                     |            3. Thoát                  |");
+            System.out.println("                                                                     |--------------------------------------|");
+            System.out.println("                                                                     |     Nhập vào lựa chọn của bạn:       |");
+            System.out.println("                                                                     *--------------------------------------*");
             int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -68,7 +69,7 @@ public class ShopManagement {
     public static void adminMenu(Scanner scanner){
         boolean checkExit = true;
         do {
-            System.out.println("|-------------Cửa Hàng Hoa---------------|");
+            System.out.println("|-----------Tiệm Hoa Tình Yêu------------|");
             System.out.println("| 1. Quản trị các loại hoa               |");
             System.out.println("|----------------------------------------|");
             System.out.println("| 2. Quản trị ca loài hoa                |");
@@ -188,15 +189,16 @@ public class ShopManagement {
             }
         }
         return null;
+
     }
     public static void regester(Scanner scanner){
         User user = new User();
          user = userImpl.inputData(scanner);
        boolean check = userImpl.create(user);
        if(check){
-           System.out.println("Dang ky thanh cong");
+           System.out.println("Đăng ký thành công");
        }else {
-           System.err.println("Dang ky khong thanh cong");
+           System.err.println("Đăng ký không thành công");
        }
     }
 

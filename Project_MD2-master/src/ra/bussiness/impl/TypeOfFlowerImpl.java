@@ -177,13 +177,12 @@ public class TypeOfFlowerImpl implements IShop<TypeOfFlower,Integer>, ITypeOfFlo
     public boolean delete(Integer integer) {
         List<TypeOfFlower> list = readFromFile();
         for (TypeOfFlower tyFlower :list) {
-            if (tyFlower.getTypeFlowerId()==integer){
+            if (tyFlower.getTypeFlowerId() == integer) {
                 tyFlower.setTypeFlowerStatus(false);
-                create(tyFlower);
-                return true;
+
             }
-        }
-        return false;
+        }                return writeFromFile( list);
+
     }
 
     @Override

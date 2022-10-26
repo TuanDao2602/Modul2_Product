@@ -4,6 +4,7 @@ import ra.bussiness.config.ShopMessage;
 import ra.bussiness.config.shopValidate;
 import ra.bussiness.design.IShop;
 import ra.bussiness.design.IUser;
+import ra.bussiness.entity.TypeOfFlower;
 import ra.bussiness.entity.User;
 import ra.bussiness.file.DataUrl;
 import ra.bussiness.file.FileAll;
@@ -164,7 +165,7 @@ public class UserImpl implements IShop <User , String>, IUser {
         List<User> listUser = readFromFile();
 
         do {
-            System.out.print("Nhập vào tên tài khoản: ");
+            System.out.print("Nhập vào tên tài khoản mới: ");
             String name = scanner.nextLine();
             System.out.print("\n");
             boolean check = shopValidate.checkUserNameLength(name);
@@ -189,28 +190,28 @@ public class UserImpl implements IShop <User , String>, IUser {
             }
         }while (true);
         do {
-            System.out.print("Nhập vào mật khẩu: ");
+            System.out.print("Nhập vào mật khẩu mới: ");
             String password = scanner.nextLine();
             System.out.print("\n");
             boolean check = shopValidate.checkPassword(password);
-            if (check){
-                System.out.print("Nhập lại mật khẩu: ");
-                String repeatPasswood = scanner.nextLine();
-                check = shopValidate.checkPassword(repeatPasswood);
+//            if (check){
+//                System.out.print("Nhập lại mật khẩu mới: ");
+//                String repeatPasswood = scanner.nextLine();
+//                check = shopValidate.checkPassword(repeatPasswood);
                 if (check){
-                    if (password.equals(repeatPasswood)){
+//                    if (password.equals(repeatPasswood)){
                         user.setPassword(password);
                         break;
                     }else {
                         System.err.println(ShopMessage.REPEAT_PASSWORD_WRONG);
                     }
-                }
-            }else {
-                System.err.println(ShopMessage.PASSWORD_LENGTH);
-            }
+//                }
+//            }else {
+//                System.err.println(ShopMessage.PASSWORD_LENGTH);
+//            }
         }while (true);
         do {
-            System.out.print("Nhập họ và tên của bạn: ");
+            System.out.print("Nhập họ và tên mới của bạn: ");
             String name = scanner.nextLine();
             System.out.print("\n");
             boolean check = shopValidate.checkEmptyString(name);
@@ -222,7 +223,7 @@ public class UserImpl implements IShop <User , String>, IUser {
             }
         }while (true);
         do {
-            System.out.print("Nhập vào email:");
+            System.out.print("Nhập vào email mới:");
             String email = scanner.nextLine();
             System.out.print("\n");
             boolean check = shopValidate.checkEmail(email);
@@ -234,7 +235,7 @@ public class UserImpl implements IShop <User , String>, IUser {
             }
         }while (true);
         do {
-            System.out.print("Nhập vào số điện thoại (Số điện thoại bắt đầu bằng 84) :  ");
+            System.out.print("Nhập vào số điện thoại mới:  ");
             String phoneNumber = scanner.nextLine();
             System.out.println("\n");
             boolean checkPhone = shopValidate.checkPhoneNumber(phoneNumber);
@@ -268,10 +269,10 @@ public class UserImpl implements IShop <User , String>, IUser {
         }else {
             permision = "Member";
         }
-        System.out.println("*-----------------------------------------------------------------------------------------------------------------------------------------*");
+        System.out.println("*----------------------------------------------------------------------------------------------------------------------------------------------------*");
         System.out.printf(" Mã tài khoản:%-20d  Tên tài khoản: %-20s Họ và tên: %-20s Số điện thoại: %-20s \n",member.getUserId(),member.getUserName(),member.getFullName(),member.getPhoneNumber());
         System.out.printf(" Email: %-25s Loại tài khoản: %-20s Trạng thái: %-20s Ngày đăng ký: %-20s\n",member.getEmail(),permision,status,member.getDate() );
-        System.out.println("*-----------------------------------------------------------------------------------------------------------------------------------------*");
+        System.out.println("*----------------------------------------------------------------------------------------------------------------------------------------------------*");
 
     }
 
@@ -304,18 +305,28 @@ public class UserImpl implements IShop <User , String>, IUser {
         }
     }
     public static void addAdminUser (Scanner scanner){
-        List<User> userList = readFromFile();
-        User user = new User();
+//        List<User> userList = readFromFile();
+//        User user = new User();
         UserImpl userImpl = new UserImpl();
+//        User user1 = new User();
+//        user1.setUserId(userList.size()+1);
+
+        List<User> usersList = readFromFile();
+        if (usersList==null){
+            usersList = new ArrayList<>();
+        }
+        User user = new User();
+        user.setUserId(usersList.size()+1);
         do {
             System.out.print("Nhập vào tên tài khoản: ");
             String name = scanner.nextLine();
+
             System.out.print("\n");
             boolean check = shopValidate.checkUserNameLength(name);
             if (check){
                 check = shopValidate.checkValidateUserName(name);
                 if (check){
-                    for (User userEx :userList) {
+                    for (User userEx :usersList) {
                         if (userEx.getUserName().equals(name)){
                             check = false;
                             break;
@@ -378,7 +389,7 @@ public class UserImpl implements IShop <User , String>, IUser {
             }
         }while (true);
         do {
-            System.out.print("Nhập vào số điện thoại (Số điện thoại bắt đầu bằng 84) :  ");
+            System.out.print("Nhập vào số điện thoại  :  ");
             String phoneNumber = scanner.nextLine();
             System.out.println("\n");
             boolean checkPhone = shopValidate.checkPhoneNumber(phoneNumber);
@@ -393,6 +404,7 @@ public class UserImpl implements IShop <User , String>, IUser {
         Date date = new Date();
         user.setDate(date);
         user.setPermission(true);
+        user.setUserStatus(true);
         boolean check = userImpl.create(user);
         if (check){
             System.out.println("Thêm tài khoản admin mới thành công !");
